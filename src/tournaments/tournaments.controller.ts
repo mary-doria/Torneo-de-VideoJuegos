@@ -6,11 +6,19 @@ import {
   Param,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TournamentsService } from './tournaments.service';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
-import { ApiTags, ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiParam,
+  ApiBody,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Torneos')
 @Controller('tournaments')
@@ -24,7 +32,9 @@ export class TournamentsController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Crear un nuevo torneo' })
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Crear un nuevo torneo (requiere token)' })
   @ApiBody({ type: CreateTournamentDto })
   create(@Body() createDto: CreateTournamentDto) {
     return this.tournamentsService.create(createDto);
@@ -38,7 +48,9 @@ export class TournamentsController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Actualizar un torneo por ID' })
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Actualizar un torneo por ID (requiere token)' })
   @ApiParam({ name: 'id', type: Number, description: 'ID del torneo a actualizar' })
   @ApiBody({ type: UpdateTournamentDto })
   update(@Param('id') id: string, @Body() updateData: UpdateTournamentDto) {
@@ -46,7 +58,9 @@ export class TournamentsController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Eliminar un torneo por ID' })
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Eliminar un torneo por ID (requiere token)' })
   @ApiParam({ name: 'id', type: Number, description: 'ID del torneo a eliminar' })
   remove(@Param('id') id: string) {
     return this.tournamentsService.remove(+id);
