@@ -49,22 +49,16 @@ API RESTful construida con **NestJS**, diseñada para crear y gestionar torneos 
 
 ## 📁 Estructura del proyecto
 src/
-│
-├── auth/ # Módulo de autenticación
-├── users/ # Módulo de usuarios
-├── tournaments/ # Módulo de torneos
-│ ├── dto/ # DTOs con validaciones
-│
-├── metrics.service.ts # Servicio Prometheus
-├── metrics.controller.ts
-├── metrics.registry.ts # Registro custom Prometheus
-│
-├── app.module.ts # Módulo principal
-└── main.ts # Bootstrap y configuración global
+├── auth/                  # Módulo de autenticación
+├── users/                 # Módulo de usuarios
+├── tournaments/           # Módulo de torneos
+│   └── dto/               # DTOs con validaciones
+├── metrics.service.ts     # Servicio Prometheus
+├── metrics.controller.ts  # Controlador para exponer /metrics
+├── metrics.registry.ts    # Registro custom Prometheus
+├── app.module.ts          # Módulo principal
+└── main.ts                # Bootstrap y configuración global
 
-yaml
-Copy
-Edit
 
 
 
