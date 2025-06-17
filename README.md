@@ -59,6 +59,7 @@ src/
 ├── metrics.registry.ts    # Registro custom Prometheus
 ├── app.module.ts          # Módulo principal
 └── main.ts                # Bootstrap y configuración global
+```
 
 
 
